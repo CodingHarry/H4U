@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="H4UApp.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Dark">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Grid.Row="1" Margin="15">
+            <TextBox Name="tbOpenHabUrl" Header="OpenHab Url" PlaceholderText="http://openhabianpi:8080" Text="{Binding OpenHabUrl, UpdateSourceTrigger=PropertyChanged}" TextChanged="tbOpenHabUrl_TextChanged"/>
+            <TextBox Margin="0,10,0,0" Name="tbOpenHabRemoteUrl" Header="OpenHab Remote Url" PlaceholderText="https://myopenhab.org" Text="{Binding OpenHabRemoteUrl, UpdateSourceTrigger=PropertyChanged}" TextChanged="tbOpenHabRemoteUrl_TextChanged"/>
+            <TextBox Margin="0,10,0,0" Name="tbOpenHabRemoteUser" Header="OpenHab Remote User" PlaceholderText="user name or email..." Text="{Binding OpenHabRemoteUser, UpdateSourceTrigger=PropertyChanged}" TextChanged="tbOpenHabRemoteUser_TextChanged"/>
+            <PasswordBox Margin="0,10,0,0" Name="tbOpenHabRemotePwd" Header="OpenHab Remote Password" Password="{Binding OpenHabRemotePassword, UpdateSourceTrigger=PropertyChanged}" PasswordChanged="tbOpenHabRemotePwd_PasswordChanged"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="de-de" Name="H4UCommandSet_de-de">
+    <AppName> Haus </AppName>
+    <Example> Licht an </Example>
+
+    <Command Name="switchLight">
+      <Example> Licht schalten </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> {room} Licht {switch} </ListenFor>
+      <Feedback> Licht im {room} schalten </Feedback>
+      <VoiceCommandService Target="H4UVoiceCommandService"/>
+    </Command>
+    
+    <Command Name="setTemperature">
+      <Example> Thermostat stellen </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> {room} {heat} [auf] {temperature} [Grad] [stellen] </ListenFor>
+      <Feedback> Thermostat im {room} auf {temperature} °C stellen </Feedback>
+      <VoiceCommandService Target="H4UVoiceCommandService"/>
+    </Command>
+    
+    <Command Name="setDimmer">
+      <Example> Dimmer stellen </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> {room} Dimmer [auf] {percent} [stellen] </ListenFor>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> {room} Hintergrund [auf] {percent} [Prozent] [stellen] </ListenFor>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> {room} Hintergrundlicht [auf] {percent} [Prozent] [stellen] </ListenFor>
+      <Feedback> Dimmer im {room} auf {percent} stellen </Feedback>
+      <VoiceCommandService Target="H4UVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="room">
+      <Item>Wohnzimmer</Item>
+      <Item>Treppenhaus</Item>
+      <Item>Schalfzimmer</Item>
+      <Item>Badezimmer</Item>
+    </PhraseList>
+  
+    <PhraseList Label="switch">
+      <Item>ein</Item>
+      <Item>einschalten</Item>
+      <Item>an</Item>
+      <Item>anschalten</Item>
+      <Item>aus</Item>
+      <Item>ausschalten</Item>
+    </PhraseList>
+      
+    <PhraseList Label="temperature">
+      <Item>15</Item>
+      <Item>16</Item>
+      <Item>17</Item>
+      <Item>18</Item>
+      <Item>19</Item>
+      <Item>20</Item>
+      <Item>21</Item>
+      <Item>22</Item>
+      <Item>23</Item>
+      <Item>24</Item>
+      <Item>25</Item>
+    </PhraseList>
+    
+    <PhraseList Label="percent">
+      <Item>aus</Item>
+      <Item>5</Item>
+      <Item>10</Item>
+      <Item>20</Item>
+      <Item>25</Item>
+      <Item>30</Item>
+      <Item>40</Item>
+      <Item>50</Item>
+      <Item>60</Item>
+      <Item>70</Item>
+      <Item>75</Item>
+      <Item>80</Item>
+      <Item>80</Item>
+      <Item>100</Item>
+      <Item>ein</Item>
+    </PhraseList>
+  
+    <PhraseList Label="heat">
+      <Item>Heizung</Item>
+      <Item>Temperatur</Item>
+      <Item>Thermostat</Item>
+    </PhraseList>
+  
+  </CommandSet>
+</VoiceCommands>

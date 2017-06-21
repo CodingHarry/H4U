@@ -1,0 +1,9 @@
+﻿<Application
+    x:Class="H4UApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:H4UApp"
+    xmlns:stack="using:H4UApp.Stack"
+    RequestedTheme="Light">
+
+</Application>

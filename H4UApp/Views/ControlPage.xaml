@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="H4UApp.Views.ControlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:H4UApp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Pivot Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <PivotItem Header="Wohnzimmer">
+            <StackPanel>
+                <Slider Name="slLight" Margin="15" FontSize="22" Maximum="99" Value="{Binding LightLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PointerCaptureLost="slLight_PointerCaptureLost">
+                    <Slider.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock FontSize="22" Text="Licht" TextWrapping="Wrap"/>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock FontSize="22" Text="{Binding LightLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <TextBlock FontSize="22" Text="%"/>
+                            </StackPanel>
+                        </Grid>
+                    </Slider.Header>
+                </Slider>
+               <controls:ColorPicker x:Name="cpBackgroundLight" Label="Hintergrund Farbe" Margin="15" ColorPicked="cpBackgroundLight_ColorPicked"/>
+                <Slider Name="slBackgroundLight" Margin="15" FontSize="22" Maximum="99" Value="{Binding BackgroundLightLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PointerCaptureLost="slBackgroundLight_PointerCaptureLost">
+                    <Slider.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock FontSize="22" Text="Dimmer Hintergrund" TextWrapping="Wrap"/>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock FontSize="22" Text="{Binding BackgroundLightLevel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <TextBlock FontSize="22" Text="%"/>
+                            </StackPanel>
+                        </Grid>
+                    </Slider.Header>
+                </Slider>
+                
+                <Slider Name="slThermostatSetPoint" Margin="15" FontSize="22"  Minimum="16" Maximum="28" Value="{Binding ThermostatSetPoint, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PointerCaptureLost="slThermostatSetPoint_PointerCaptureLost" SmallChange="0.5" StepFrequency="0.5" >
+                    <Slider.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock FontSize="22" Text="Thermostat"/>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock FontSize="22" Text="{Binding ThermostatSetPoint, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <TextBlock FontSize="22" Text="°C"/>
+                            </StackPanel>                            
+                        </Grid>
+                    </Slider.Header>
+                </Slider>
+            </StackPanel>
+        </PivotItem>
+
+        <PivotItem Header="Treppenhaus">
+            <StackPanel  >
+                <ToggleSwitch Name="tsLicht" Margin="15" FontSize="22" Header="Licht" IsOn="{Binding LightSwitch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Toggled="tsLicht_Toggled"/>
+            </StackPanel>
+        </PivotItem>
+    </Pivot>
+</Page>

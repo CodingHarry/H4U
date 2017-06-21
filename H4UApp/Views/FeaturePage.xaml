@@ -1,0 +1,103 @@
+﻿<Page
+    x:Class="H4UApp.Views.FeaturePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:H4UApp.Views"
+    xmlns:stack="using:H4UApp.Stack"
+    xmlns:converters="using:H4UApp.Converters"
+    xmlns:controls="using:H4UApp.Controls"
+    xmlns:features="using:H4UApp.Controls.Features"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    RequestedTheme="Dark"
+    mc:Ignorable="d" >
+    
+    <Page.Resources>        
+        <ResourceDictionary>
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+            <DataTemplate x:Key="SwitchTemplate">
+                <features:Switch Feature="{Binding}"
+                                 IsOn="{Binding Value, UpdateSourceTrigger=PropertyChanged}"                                  
+                                 IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                 Label="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                                 Category="{Binding Category, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="SwitchIndicatorTemplate">
+                <features:Indicator Feature="{Binding}"
+                                 IsOn="{Binding Value, UpdateSourceTrigger=PropertyChanged}"      
+                                 Label="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                                 Category="{Binding Category, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="DimmerTemplate">
+                <features:Slider Feature="{Binding}"
+                                 Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}"                                  
+                                 IsEnabled="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                 Label="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                                 Category="{Binding Category, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="NumericTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <controls:CategoryIcon FontSize="20" Margin="0,0,5,0" Category="{Binding Category, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Grid.Column="1" TextAlignment="Right" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </DataTemplate>
+            <stack:H4UDeviceFeatureTemplateSelector x:Key="H4UDeviceFeatureTemplateSelector" 
+                                                    SwitchTemplate="{StaticResource SwitchTemplate}" 
+                                                    SwitchIndicatorTemplate="{StaticResource SwitchIndicatorTemplate}"
+                                                    DimmmerTemplate="{StaticResource DimmerTemplate}" 
+                                                    NumericTemplate="{StaticResource NumericTemplate}"/>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Pivot Grid.Row="1" ItemsSource="{Binding}">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Key}"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate>
+                    <ListView Grid.Row="1" Name="lvDevices" ItemsSource="{Binding}" SelectionMode="None" IsItemClickEnabled="False">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid Margin="0,5,0,15">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <controls:OnlineIndicator Margin="0,0,5,0" Grid.RowSpan="2" FontSize="24" IsOnline="{Binding IsOnline, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBlock VerticalAlignment="Center" FontWeight="Bold"  Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+                                        <TextBlock FontSize="12" FontStyle="Italic" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding State, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding State, Converter={StaticResource StringToVisibilityConverter}}"/>
+                                    </Grid>
+                                    <ListView ItemsSource="{Binding Features}" SelectionMode="None" IsItemClickEnabled="False" ItemTemplateSelector="{StaticResource ResourceKey=H4UDeviceFeatureTemplateSelector}">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+        </Pivot>
+     </Grid>
+</Page>

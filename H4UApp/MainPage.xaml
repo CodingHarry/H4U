@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="H4UApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:H4UApp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" RequestedTheme="Dark" >
+
+    <Page.Resources>
+        <Storyboard x:Key="showNav">
+            <DoubleAnimation Storyboard.TargetName="navMenu" 
+                             Storyboard.TargetProperty="Opacity"
+                             Duration="00:00:00.2"
+                             To="1" />
+
+            <DoubleAnimation Storyboard.TargetName="contentFrame" 
+                             Storyboard.TargetProperty="Opacity" 
+                             Duration="00:00:00.2"
+                             To="0" />
+
+            <DoubleAnimation Storyboard.TargetName="navMenu"  
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"                             
+                             Duration="00:00:00.3"
+                             To="0" >
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+        </Storyboard>
+        <Storyboard x:Key="hideNav">
+            <DoubleAnimation Storyboard.TargetName="navMenu" 
+                             Storyboard.TargetProperty="Opacity" 
+                             Duration="00:00:00.15"
+                             To="0" />
+
+            <DoubleAnimation Storyboard.TargetName="contentFrame" 
+                             Storyboard.TargetProperty="Opacity" 
+                             Duration="00:00:00.15"
+                             To="1" />
+
+            <DoubleAnimation Storyboard.TargetName="navMenu"  
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                             Duration="00:00:00.2"
+                             To="-360"/>
+
+        </Storyboard>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <controls:NavButton Name="navButton" Click="navButton_Click"/>
+            <TextBlock x:Name="title" Grid.Column="1" Margin="10,5" Text="Title" TextTrimming="CharacterEllipsis" FontSize="32" IsHitTestVisible="True" />
+        </Grid>
+
+        <Frame Name="contentFrame" Grid.Row="1"/>
+        
+        <Grid Name="navMenu" Visibility="Visible" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TranslateTransform X="-360"/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64"/>
+                <RowDefinition Height="64"/>
+                <RowDefinition/>
+                <RowDefinition Height="64"/>
+            </Grid.RowDefinitions>
+
+            <!-- Menu Devices -->
+            <controls:NavMenuItem x:Name="navDevices" Icon="&#xE10F;" Title="Devices" Click="navDevices_Click"/>
+
+            <!-- Menu Settings -->
+            <controls:NavMenuItem x:Name="navSettings" Icon="&#xE115;" Title="Settings" Grid.Row="3" Click="navSettings_Click"/>
+        </Grid>        
+    </Grid>
+</Page>
